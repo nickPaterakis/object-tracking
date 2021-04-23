@@ -1,34 +1,18 @@
-"""
-Onomatepwnumo:
-Nikolaos Paterakhs
-
-Tmhma:
-Mhxanikwn Plhroforikhs kai Ypologistwn
-
-Panepisthmio:
-Panepisthmio Dutikhs Attikhs
-
-Email:
-cs161084@uniwa.gr
-
-Arithmos mhtrwou:
-161084
-"""
-
 import cv2
 import sys
 import numpy as np
 from scipy.spatial import distance as dist
 import time
 
-(major_ver, minor_ver, subminor_ver) = (cv2.__version__).split('.')
 
-def tamplateMatching(img_rgb) :
+def template_matching(img_rgb) :
 
     img_gray = cv2.cvtColor(img_rgb, cv2.COLOR_BGR2GRAY)
 
     # load the template image we look for
-    template = cv2.imread('images/F-16/temp.jpg', 0)
+    # give an image of the object that you want to track. The image should be from the first frame
+    # of the video
+    template = cv2.imread('', 0)
     w, h = template.shape[::-1]
 
     # run the templae matching
@@ -39,10 +23,13 @@ def tamplateMatching(img_rgb) :
     # mark the corresponding location(s)
     return (loc[1][0], loc[0][0], w, h)
 
-def featureMatching(frame):
+
+def feature_matching(frame):
     MIN_MATCH_COUNT = 10
 
-    img1 = cv2.imread('images/F-16/temp.jpg', 0)  # queryImage as grayscale
+    # give an image of the object that you want to track. The image should be from the first frame
+    # of the video
+    img1 = cv2.imread('', 0)  # queryImage as grayscale
 
     # Initiate SIFT detector
     # sift  = cv2.ORB_create() # before opencv 3
@@ -81,8 +68,9 @@ def featureMatching(frame):
 
 if __name__ == '__main__':
 
-    # Set up tracker.
+    (major_ver, minor_ver, subminor_ver) = (cv2.__version__).split('.')
 
+    # Set up tracker.
     tracker_types = ['BOOSTING', 'MIL', 'KCF', 'TLD', 'MEDIANFLOW', 'GOTURN', 'MOSSE', 'CSRT']
     tracker_type = tracker_types[0]
     sum_time = 0
@@ -110,7 +98,7 @@ if __name__ == '__main__':
             tracker = cv2.TrackerCSRT_create()
 
     # Read video
-    video = cv2.VideoCapture("Video/AGGRESSIVE_F-16.mp4")
+    video = cv2.VideoCapture("")
     centerCoord = []
 
     # Exit if video not opened.
@@ -124,9 +112,11 @@ if __name__ == '__main__':
         print('Cannot read video file')
         sys.exit()
 
-    # cv2.imwrite('images/temp.jpg', frame)
-    # bbox = tamplateMatching(frame)
-    bbox = featureMatching(frame)
+    # save the first frame
+    # cv2.imwrite('first_frame.jpg', frame)
+
+    # bbox = template_matching(frame)
+    bbox = feature_matching(frame)
 
     # Calculate the center of bounding box
     centerCoord = (bbox[0] + (bbox[2] / 2), bbox[1] + (bbox[3] / 2))
