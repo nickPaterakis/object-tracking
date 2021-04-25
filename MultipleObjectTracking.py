@@ -1,20 +1,3 @@
-"""
-Onomatepwnumo:
-Nikolaos Paterakhs
-
-Tmhma:
-Mhxanikwn Plhroforikhs kai Ypologistwn
-
-Panepisthmio:
-Panepisthmio Dutikhs Attikhs
-
-Email:
-cs161084@uniwa.gr
-
-Arithmos mhtrwou:
-161084
-"""
-
 from __future__ import print_function
 import sys
 import cv2
