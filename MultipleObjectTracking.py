@@ -6,8 +6,6 @@ from scipy.spatial import distance as dist
 import numpy as np
 import time
 
-#https://www.learnopencv.com/multitracker-multiple-object-tracking-using-opencv-c-python/
-
 trackerTypes = ['BOOSTING', 'MIL', 'KCF', 'TLD', 'MEDIANFLOW', 'GOTURN', 'MOSSE', 'CSRT']
 sum_time = 0
 count = 0
@@ -41,7 +39,7 @@ def createTrackerByName(trackerType):
 
 #Step 2: Read First Frame of a Video
 # Set video to load
-videoPath = "Video/messi.mp4"
+videoPath = "your video"
 
 # Create a video capture object to read videos
 cap = cv2.VideoCapture(videoPath)
